@@ -7,3 +7,10 @@ services:
     volumes:
       - ./contact_server:/app
     command: node_modules/nodemon/bin/nodemon.js -w /app /app/src/index.js
+
+  contact_lint:
+    build:
+      context: ./contact_server
+    volumes:
+      - ./contact_server:/app
+    command: ./node_modules/.bin/eslint .
