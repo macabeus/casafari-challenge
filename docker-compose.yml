@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  contact_server:
+    build:
+      context: ./contact_server
+    volumes:
+      - ./contact_server:/app
+    command: node_modules/nodemon/bin/nodemon.js -w /app /app/src/index.js
