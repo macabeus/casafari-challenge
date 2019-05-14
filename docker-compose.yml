@@ -7,6 +7,8 @@ services:
     volumes:
       - ./contact_server:/app
     command: node_modules/nodemon/bin/nodemon.js -w /app /app/src/index.js
+    ports:
+      - 3000:3000
 
   contact_lint:
     build:
@@ -14,3 +16,10 @@ services:
     volumes:
       - ./contact_server:/app
     command: ./node_modules/.bin/eslint .
+
+  contact_tests:
+    build:
+      context: ./contact_server
+    volumes:
+      - ./contact_server:/app
+    command: ./node_modules/.bin/lab tests
