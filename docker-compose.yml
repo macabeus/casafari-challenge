@@ -6,6 +6,8 @@ services:
       context: ./contact_server
     volumes:
       - ./contact_server:/app
+    env_file:
+      - dev.env
     command: node_modules/nodemon/bin/nodemon.js -w /app /app/src/index.js
     ports:
       - 3000:3000

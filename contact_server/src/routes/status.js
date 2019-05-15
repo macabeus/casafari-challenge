@@ -1,4 +1,4 @@
-const routeSpec = ({
+const routeSpec = () => ({
   method: 'GET',
   path: '/status',
   handler: (request, h) => {
