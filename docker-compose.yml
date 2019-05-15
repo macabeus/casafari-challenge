@@ -23,3 +23,12 @@ services:
     volumes:
       - ./contact_server:/app
     command: ./node_modules/.bin/lab tests
+
+  database:
+    image: mongo:4.1.11
+    volumes:
+      - "./database_data:/data/db"
+    env_file:
+      - dev.env
+    expose:
+      - 27017
