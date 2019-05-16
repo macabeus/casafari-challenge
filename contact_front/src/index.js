@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import ContactList from './components/contact-list'
+import ContactCard from './containers/contact-card'
 
-const App = () => <ContactList />
+const App = () => <ContactCard />
 
 ReactDOM.render(<App />, document.getElementById('app'))
