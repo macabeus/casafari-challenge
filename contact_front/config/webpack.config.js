@@ -13,6 +13,10 @@ const rules = [
       loader: 'babel-loader',
     },
   },
+  {
+    test: /\.css$/,
+    use: ['style-loader', 'css-loader'],
+  },
 ]
 
 module.exports = {
