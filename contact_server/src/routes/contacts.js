@@ -1,3 +1,5 @@
+const sendDatabaseErrorsMessage = require('./helpers/send-database-errors-message')
+
 const routeSpecGet = server => ({
   method: 'GET',
   path: '/contacts',
@@ -18,7 +20,13 @@ const routeSpecPost = server => ({
   handler: async (request, h) => {
     const { db } = server.app
     const { name, lastName, phone } = request.payload
-    const result = await db.contacts.save({ name, lastName, phone })
+
+    let result
+    try {
+      result = await db.contacts.save({ name, lastName, phone })
+    } catch ({ errors }) {
+      return sendDatabaseErrorsMessage(errors, h)
+    }
 
     const response = h.response(result)
     response.code(201)
