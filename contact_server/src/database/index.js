@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const contacts = require('./contacts')
 
 const username = process.env.MONGO_INITDB_ROOT_USERNAME
 const password = process.env.MONGO_INITDB_ROOT_PASSWORD
@@ -20,6 +21,7 @@ const startDatabase = () => new Promise((resolve, reject) => {
     }
 
     const appDbMethods = {
+      contacts,
     }
 
     resolve(appDbMethods)
