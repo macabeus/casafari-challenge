@@ -59,7 +59,7 @@ const EditContactCard = ({ match }) => {
   }
 
   if (toContactList) {
-    return <Redirect to="/" />
+    return <Redirect push to="/" />
   }
 
   if (contacts === null) {

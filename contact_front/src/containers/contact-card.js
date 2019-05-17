@@ -28,7 +28,7 @@ const ContactCard = () => {
   }, [modalIsOpen])
 
   if (toEditContact !== null) {
-    return <Redirect to={`/edit/${toEditContact}`} />
+    return <Redirect push to={`/edit/${toEditContact}`} />
   }
 
   return (
