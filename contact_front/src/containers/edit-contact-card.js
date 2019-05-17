@@ -5,6 +5,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Container,
 } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import AlertErrors from '../components/alert-errors'
@@ -66,21 +67,23 @@ const EditContactCard = ({ match }) => {
   }
 
   return (
-    <Card>
-      <CardHeader>Edit Contact</CardHeader>
-      <CardBody>
-        <AlertErrors errors={errors} />
+    <Container fluid>
+      <Card>
+        <CardHeader>Edit Contact</CardHeader>
+        <CardBody>
+          <AlertErrors errors={errors} />
 
-        <ContactForm
-          changeFormHandle={setFormData}
-          initialFormData={contacts}
-        />
+          <ContactForm
+            changeFormHandle={setFormData}
+            initialFormData={contacts}
+          />
 
-        <Button onClick={update}>Save</Button>{' '}
-        <Button onClick={remove}>Delete</Button>{' '}
-        <Button onClick={() => { setToContactList(true) }}>Cancel</Button>
-      </CardBody>
-    </Card>
+          <Button color="primary" onClick={update}>Save</Button>{' '}
+          <Button color="danger" onClick={remove}>Delete</Button>{' '}
+          <Button onClick={() => { setToContactList(true) }}>Cancel</Button>
+        </CardBody>
+      </Card>
+    </Container>
   )
 }
 

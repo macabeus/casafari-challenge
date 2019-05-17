@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Card,
   CardBody,
   CardHeader,
   Col,
+  Container,
   Row,
 } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
@@ -31,7 +32,7 @@ const ContactCard = () => {
   }
 
   return (
-    <Fragment>
+    <Container fluid>
       <AddContactModal
         isOpen={modalIsOpen}
         closeModalHandle={() => setModalIsOpen(false)}
@@ -41,7 +42,7 @@ const ContactCard = () => {
         <CardHeader>Contact List</CardHeader>
         <CardBody>
           <Row>
-            <Col sm={{ offset: 11, size: 'auto' }} style={{ padding: '.5rem' }}>
+            <Col style={{ padding: '.5rem' }}>
               <AddContactButton openModalHandle={() => setModalIsOpen(true)} />
             </Col>
           </Row>
@@ -57,7 +58,7 @@ const ContactCard = () => {
 
         </CardBody>
       </Card>
-    </Fragment>
+    </Container>
   )
 }
 
