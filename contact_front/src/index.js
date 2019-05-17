@@ -9,7 +9,7 @@ const AppRouter = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={ContactCard} />
-      <Route path="/edit" component={EditContactCard} />
+      <Route path="/edit/:id" component={EditContactCard} />
     </Switch>
   </Router>
 )

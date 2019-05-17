@@ -7,6 +7,13 @@ const fetchContacts = async () => {
   return responseJson
 }
 
+const fetchContact = async (id) => {
+  const response = await fetch(`${baseUrl}/contacts/${id}`)
+  const responseJson = await response.json()
+
+  return responseJson
+}
+
 const saveContact = async ({ firstName, lastName, phone }) => {
   const data = { firstName, lastName, phone }
   const response = await fetch(`${baseUrl}/contacts`, {
@@ -20,4 +27,22 @@ const saveContact = async ({ firstName, lastName, phone }) => {
   return response
 }
 
-export { fetchContacts, saveContact }
+const updateContact = async (id, { firstName, lastName, phone }) => {
+  const data = { firstName, lastName, phone }
+  const response = await fetch(`${baseUrl}/contacts/${id}`, {
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'PATCH',
+  })
+
+  return response
+}
+
+export {
+  fetchContacts,
+  fetchContact,
+  saveContact,
+  updateContact,
+}

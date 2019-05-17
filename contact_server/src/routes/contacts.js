@@ -25,6 +25,23 @@ const routeSpecGet = server => ({
   },
 })
 
+const routeSpecGetId = server => ({
+  method: 'GET',
+  path: '/contacts/{id}',
+  handler: async (request, h) => {
+    const { db } = server.app
+    const { id } = request.params
+    const findResult = await db.contacts.find(id)
+
+    const resultMapped = buildContactsToReponse(findResult)
+
+    const response = h.response(resultMapped)
+    response.type('text/json')
+
+    return response
+  },
+})
+
 const routeSpecPost = server => ({
   method: 'POST',
   path: '/contacts',
@@ -49,7 +66,34 @@ const routeSpecPost = server => ({
   },
 })
 
+const routeSpecPatch = server => ({
+  method: 'PATCH',
+  path: '/contacts/{id}',
+  handler: async (request, h) => {
+    const { db } = server.app
+    const { id } = request.params
+    const { firstName, lastName, phone } = request.payload
+
+    let updateResult
+    try {
+      updateResult = await db.contacts
+        .update(id, { firstName, lastName, phone })
+    } catch (error) {
+      return sendDatabaseErrorsMessage({ error }, h)
+    }
+
+    const resultMapped = buildContactsToReponse(updateResult)
+
+    const response = h.response(resultMapped)
+    response.type('text/json')
+
+    return response
+  },
+})
+
 module.exports = [
   routeSpecGet,
+  routeSpecGetId,
   routeSpecPost,
+  routeSpecPatch,
 ]
