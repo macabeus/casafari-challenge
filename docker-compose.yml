@@ -6,6 +6,8 @@ services:
       context: ./contact_server
     volumes:
       - ./contact_server:/app
+    env_file:
+      - dev.env
     command: node_modules/nodemon/bin/nodemon.js -w /app /app/src/index.js
     ports:
       - 3000:3000
@@ -23,3 +25,12 @@ services:
     volumes:
       - ./contact_server:/app
     command: ./node_modules/.bin/lab tests
+
+  database:
+    image: mongo:4.1.11
+    volumes:
+      - "./database_data:/data/db"
+    env_file:
+      - dev.env
+    expose:
+      - 27017
