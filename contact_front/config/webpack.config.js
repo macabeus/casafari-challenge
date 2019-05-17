@@ -1,3 +1,4 @@
+const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -20,8 +21,16 @@ const rules = [
 ]
 
 module.exports = {
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules,
+  },
+  output: {
+    filename: 'index_bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   plugins: [htmlPlugin],
 }
