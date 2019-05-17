@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, Fragment } from 'react'
 import {
   Card,
   CardBody,
@@ -7,27 +7,38 @@ import {
   Row,
 } from 'reactstrap'
 import AddContactButton from '../components/add-contact-button'
+import AddContactModal from '../components/add-contact-modal'
 import ContactList from '../components/contact-list'
 
-const ContactCard = () => (
-  <Card>
-    <CardHeader>Contact List</CardHeader>
-    <CardBody>
+const ContactCard = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
-      <Row>
-        <Col sm={{ offset: 11, size: 'auto' }} style={{ padding: '.5rem' }}>
-          <AddContactButton />
-        </Col>
-      </Row>
+  return (
+    <Fragment>
+      <AddContactModal
+        isOpen={modalIsOpen}
+        closeModalHandle={() => setModalIsOpen(false)}
+      />
 
-      <Row>
-        <Col>
-          <ContactList />
-        </Col>
-      </Row>
+      <Card>
+        <CardHeader>Contact List</CardHeader>
+        <CardBody>
+          <Row>
+            <Col sm={{ offset: 11, size: 'auto' }} style={{ padding: '.5rem' }}>
+              <AddContactButton openModalHandle={() => setModalIsOpen(true)} />
+            </Col>
+          </Row>
 
-    </CardBody>
-  </Card>
-)
+          <Row>
+            <Col>
+              <ContactList />
+            </Col>
+          </Row>
+
+        </CardBody>
+      </Card>
+    </Fragment>
+  )
+}
 
 export default ContactCard
