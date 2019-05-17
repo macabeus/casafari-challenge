@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import {
   Card,
   CardBody,
@@ -9,9 +9,20 @@ import {
 import AddContactButton from '../components/add-contact-button'
 import AddContactModal from '../components/add-contact-modal'
 import ContactList from '../components/contact-list'
+import { fetchContacts } from '../network/contacts'
 
 const ContactCard = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [contacts, setContacts] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedContacts = await fetchContacts()
+      setContacts(fetchedContacts)
+    }
+
+    fetchData()
+  }, [modalIsOpen])
 
   return (
     <Fragment>
@@ -31,7 +42,7 @@ const ContactCard = () => {
 
           <Row>
             <Col>
-              <ContactList />
+              <ContactList contacts={contacts} />
             </Col>
           </Row>
 

@@ -1,19 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Table } from 'reactstrap'
-import { fetchContacts } from '../network/contacts'
 
-const ContactList = () => {
-  const [contacts, setContacts] = useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const fetchedContacts = await fetchContacts()
-      setContacts(fetchedContacts)
-    }
-
-    fetchData()
-  }, [])
-
+const ContactList = ({ contacts }) => {
   const contactsC = contacts.map(contact => (
     <tr key={contact.phone}>
       <th scope="row">{contact.firstName}</th>
