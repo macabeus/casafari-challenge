@@ -16,7 +16,7 @@ const ContactList = () => {
 
   const contactsC = contacts.map(contact => (
     <tr key={contact.phone}>
-      <th scope="row">{contact.name}</th>
+      <th scope="row">{contact.firstName}</th>
       <td>{contact.lastName}</td>
       <td>{contact.phone}</td>
     </tr>

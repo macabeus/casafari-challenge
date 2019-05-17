@@ -19,11 +19,11 @@ const routeSpecPost = server => ({
   path: '/contacts',
   handler: async (request, h) => {
     const { db } = server.app
-    const { name, lastName, phone } = request.payload
+    const { firstName, lastName, phone } = request.payload
 
     let result
     try {
-      result = await db.contacts.save({ name, lastName, phone })
+      result = await db.contacts.save({ firstName, lastName, phone })
     } catch ({ errors }) {
       return sendDatabaseErrorsMessage(errors, h)
     }
