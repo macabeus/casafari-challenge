@@ -5,6 +5,13 @@ const startDatabase = require('./database')
 const server = Hapi.server({
   port: 3000,
   host: '0.0.0.0',
+  routes: {
+    cors: {
+      origin: ['*'],
+      headers: ['Accept', 'Content-Type'],
+      additionalHeaders: ['X-Requested-With'],
+    },
+  },
 })
 
 routes.forEach(routeSpec => server.route(routeSpec(server)))

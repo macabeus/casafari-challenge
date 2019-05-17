@@ -5,7 +5,7 @@ const { init } = require('../../src/server')
 const findAllResult = [
   {
     _id: '5cdb88af9d3797049aec5457',
-    name: 'pikachu',
+    firstName: 'pikachu',
     lastName: 'pika',
     phone: '085',
   },
