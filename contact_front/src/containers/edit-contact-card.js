@@ -9,7 +9,7 @@ import {
 import { Redirect } from 'react-router-dom'
 import AlertErrors from '../components/alert-errors'
 import ContactForm from '../components/contact-form'
-import { fetchContact, updateContact } from '../network/contacts'
+import { fetchContact, updateContact, deleteContact } from '../network/contacts'
 
 const EditContactCard = ({ match }) => {
   const {
@@ -44,6 +44,19 @@ const EditContactCard = ({ match }) => {
     setErrors(resultErrors)
   }
 
+  const remove = async () => {
+    const result = await deleteContact(id)
+
+    if (result.ok) {
+      setToContactList(true)
+      setErrors({})
+      return
+    }
+
+    const resultErrors = await result.json()
+    setErrors(resultErrors)
+  }
+
   if (toContactList) {
     return <Redirect to="/" />
   }
@@ -64,6 +77,7 @@ const EditContactCard = ({ match }) => {
         />
 
         <Button onClick={update}>Save</Button>{' '}
+        <Button onClick={remove}>Delete</Button>{' '}
         <Button onClick={() => { setToContactList(true) }}>Cancel</Button>
       </CardBody>
     </Card>

@@ -24,9 +24,12 @@ const update = (id, dataToUpdate) => {
   return Contact.findByIdAndUpdate(id, dataFiltered, { new: true })
 }
 
+const deleteOne = id => Contact.deleteOne({ _id: id })
+
 module.exports = {
   findAll,
   find,
   save,
   update,
+  deleteOne,
 }

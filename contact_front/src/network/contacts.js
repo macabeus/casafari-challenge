@@ -40,9 +40,18 @@ const updateContact = async (id, { firstName, lastName, phone }) => {
   return response
 }
 
+const deleteContact = async (id) => {
+  const response = await fetch(`${baseUrl}/contacts/${id}`, {
+    method: 'DELETE',
+  })
+
+  return response
+}
+
 export {
   fetchContacts,
   fetchContact,
   saveContact,
   updateContact,
+  deleteContact,
 }

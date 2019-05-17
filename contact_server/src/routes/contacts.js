@@ -91,9 +91,30 @@ const routeSpecPatch = server => ({
   },
 })
 
+const routeSpecDelete = server => ({
+  method: 'DELETE',
+  path: '/contacts/{id}',
+  handler: async (request, h) => {
+    const { db } = server.app
+    const { id } = request.params
+
+    try {
+      await db.contacts.deleteOne(id)
+    } catch (error) {
+      return sendDatabaseErrorsMessage({ error }, h)
+    }
+
+    const response = h.response()
+    response.code(204)
+
+    return response
+  },
+})
+
 module.exports = [
   routeSpecGet,
   routeSpecGetId,
   routeSpecPost,
   routeSpecPatch,
+  routeSpecDelete,
 ]
