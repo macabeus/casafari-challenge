@@ -31,7 +31,7 @@ const routeSpecGetId = server => ({
   handler: async (request, h) => {
     const { db } = server.app
     const { id } = request.params
-    const findResult = await db.contacts.find(id)
+    const findResult = await db.contacts.findOne(id)
 
     const resultMapped = buildContactsToReponse(findResult)
 
@@ -51,7 +51,7 @@ const routeSpecPost = server => ({
 
     let saveResult
     try {
-      saveResult = await db.contacts.save({ firstName, lastName, phone })
+      saveResult = await db.contacts.saveOne({ firstName, lastName, phone })
     } catch ({ errors }) {
       return sendDatabaseErrorsMessage(errors, h)
     }
@@ -77,7 +77,7 @@ const routeSpecPatch = server => ({
     let updateResult
     try {
       updateResult = await db.contacts
-        .update(id, { firstName, lastName, phone })
+        .updateOne(id, { firstName, lastName, phone })
     } catch (error) {
       return sendDatabaseErrorsMessage({ error }, h)
     }

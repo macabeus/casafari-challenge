@@ -11,7 +11,7 @@ import { Redirect } from 'react-router-dom'
 import AddContactButton from '../components/add-contact-button'
 import AddContactModal from '../components/add-contact-modal'
 import ContactList from '../components/contact-list'
-import { fetchContacts } from '../network/contacts'
+import contactsNetwork from '../network/contacts'
 
 const ContactCard = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -20,7 +20,7 @@ const ContactCard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedContacts = await fetchContacts()
+      const fetchedContacts = await contactsNetwork.findAll()
       setContacts(fetchedContacts)
     }
 

@@ -10,7 +10,7 @@ import {
 import { Redirect } from 'react-router-dom'
 import AlertErrors from '../components/alert-errors'
 import ContactForm from '../components/contact-form'
-import { fetchContact, updateContact, deleteContact } from '../network/contacts'
+import contactsNetwork from '../network/contacts'
 
 const EditContactCard = ({ match }) => {
   const {
@@ -25,7 +25,7 @@ const EditContactCard = ({ match }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedContact = await fetchContact(id)
+      const fetchedContact = await contactsNetwork.findOne(id)
       setContact(fetchedContact)
     }
 
@@ -33,7 +33,7 @@ const EditContactCard = ({ match }) => {
   }, [id])
 
   const update = async () => {
-    const result = await updateContact(id, formData)
+    const result = await contactsNetwork.updateOne(id, formData)
 
     if (result.ok) {
       setToContactList(true)
@@ -46,7 +46,7 @@ const EditContactCard = ({ match }) => {
   }
 
   const remove = async () => {
-    const result = await deleteContact(id)
+    const result = await contactsNetwork.deleteOne(id)
 
     if (result.ok) {
       setToContactList(true)

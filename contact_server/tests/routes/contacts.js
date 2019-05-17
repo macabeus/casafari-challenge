@@ -25,7 +25,7 @@ const saveResult = {
 const mockAppDbMethods = {
   contacts: {
     findAll: () => findAllResult,
-    save: () => saveResult,
+    saveOne: () => saveResult,
   },
 }
 
