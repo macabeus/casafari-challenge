@@ -6,17 +6,13 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  Form, FormGroup, Label, Input,
 } from 'reactstrap'
 import AlertErrors from './alert-errors'
+import ContactForm from './contact-form'
 import { saveContact } from '../network/contacts'
 
 const AddContactModal = ({ closeModalHandle, isOpen }) => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    telephone: '',
-  })
+  const [formData, setFormData] = useState({})
   const [errors, setErrors] = useState({})
 
   const saveContactHandle = async () => {
@@ -32,34 +28,12 @@ const AddContactModal = ({ closeModalHandle, isOpen }) => {
     setErrors(resultErrors)
   }
 
-  const updateFormField = (event) => {
-    const { name, value } = event.target
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
-  }
-
   return (
     <Modal isOpen={isOpen}>
       <ModalHeader>Add Contact</ModalHeader>
       <ModalBody>
         <AlertErrors errors={errors} />
-        <Form>
-          <FormGroup>
-            <Label for="exampleEmail">First Name</Label>
-            <Input name="firstName" id="firstName" placeholder="Satoshi" onChange={updateFormField} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Last Name</Label>
-            <Input name="lastName" id="lastName" placeholder="Nakamoto" onChange={updateFormField} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelect">Telephone</Label>
-            <Input name="phone" id="phone" placeholder="+55 085 99123-9876" onChange={updateFormField} />
-          </FormGroup>
-        </Form>
+        <ContactForm changeFormHandle={setFormData} />
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={saveContactHandle}>Save new contact</Button>{' '}

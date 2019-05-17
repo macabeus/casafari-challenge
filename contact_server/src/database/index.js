@@ -10,6 +10,7 @@ const options = {
   useNewUrlParser: true,
   reconnectTries: 60,
   reconnectInterval: 1000,
+  useFindAndModify: false,
 }
 
 const startDatabase = () => new Promise((resolve, reject) => {

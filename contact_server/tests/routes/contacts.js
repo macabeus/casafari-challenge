@@ -4,18 +4,22 @@ const { init } = require('../../src/server')
 
 const findAllResult = [
   {
-    _id: '5cdb88af9d3797049aec5457',
+    id: '5cdb88af9d3797049aec5457',
     firstName: 'pikachu',
     lastName: 'pika',
     phone: '085',
+    createdAt: 'createdAtData',
+    updatedAt: 'updatedAtData',
   },
 ]
 
 const saveResult = {
-  _id: '111111111111111111111111',
-  name: 'saving',
+  id: '111111111111111111111111',
+  firstName: 'saving',
   lastName: 'savingLastName',
   phone: '+55',
+  createdAt: 'createdAtData',
+  updatedAt: 'updatedAtData',
 }
 
 const mockAppDbMethods = {
