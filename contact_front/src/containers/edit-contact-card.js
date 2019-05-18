@@ -76,6 +76,7 @@ const EditContactCard = ({ match }) => {
           <ContactForm
             changeFormHandle={setFormData}
             initialFormData={contacts}
+            errors={errors}
           />
 
           <Button color="primary" onClick={update}>Save</Button>{' '}

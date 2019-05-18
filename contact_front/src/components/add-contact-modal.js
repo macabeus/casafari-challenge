@@ -38,7 +38,7 @@ const AddContactModal = ({ closeModalHandle, isOpen }) => {
       <ModalHeader>Add Contact</ModalHeader>
       <ModalBody>
         <AlertErrors errors={errors} />
-        <ContactForm changeFormHandle={setFormData} />
+        <ContactForm changeFormHandle={setFormData} errors={errors} />
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={saveContactHandle}>Save new contact</Button>{' '}

@@ -1,3 +1,5 @@
+const { keys } = require('ramda')
+const FieldShouldBeUniqueError = require('../errors/field-shoud-be-unique')
 const sendDatabaseErrorsMessage = require('./helpers/send-database-errors-message')
 
 const buildContactsToReponse = contact => ({
@@ -79,6 +81,13 @@ const routeSpecPatch = server => ({
       updateResult = await db.contacts
         .updateOne(id, { firstName, lastName, phone })
     } catch (error) {
+      if (error.code === 11000) {
+        return sendDatabaseErrorsMessage(
+          { [keys(error.keyPattern)[0]]: new FieldShouldBeUniqueError() },
+          h
+        )
+      }
+
       return sendDatabaseErrorsMessage({ error }, h)
     }
 
