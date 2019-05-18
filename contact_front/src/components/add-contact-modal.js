@@ -28,6 +28,11 @@ const AddContactModal = ({ closeModalHandle, isOpen }) => {
     setErrors(resultErrors)
   }
 
+  const clearState = () => {
+    setFormData({})
+    setErrors({})
+  }
+
   return (
     <Modal isOpen={isOpen}>
       <ModalHeader>Add Contact</ModalHeader>
@@ -37,7 +42,7 @@ const AddContactModal = ({ closeModalHandle, isOpen }) => {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={saveContactHandle}>Save new contact</Button>{' '}
-        <Button color="secondary" onClick={closeModalHandle}>Cancel</Button>
+        <Button color="secondary" onClick={() => { clearState(); closeModalHandle() }}>Cancel</Button>
       </ModalFooter>
     </Modal>
   )
