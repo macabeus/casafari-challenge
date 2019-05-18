@@ -41,13 +41,15 @@ First, you need to have Docker and Docker Compose on your machine. If you don't,
 Then, run the following command to start the MongoDB container:
 
 ```
-docker-compose up database
+> docker-compose up database
 ```
 
 After Mongo is initialized (it takes a few seconds), you need to run the back-end project:
 
 ```
-docker-compose up contact_server
+> cd contact_server
+> npm i
+> docker-compose up contact_server
 ```
 
 Then, the API will be running at [`http://localhost:3000`](http://localhost:3000). You can check if everything is fine using the API [`GET http://localhost:3000/`](http://localhost:3000/status); if you see `"ok"`, then the server is running.
@@ -55,7 +57,9 @@ Then, the API will be running at [`http://localhost:3000`](http://localhost:3000
 Now, to run the front-end start the following service:
 
 ```
-docker-compose up contact_front
+> cd contact_front
+> npm i
+> docker-compose up contact_front
 ```
 
 Finally, just head to [`http://localhost:8080`](http://localhost:8080) to see the application running!
