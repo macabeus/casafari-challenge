@@ -10,14 +10,11 @@ const {
 } = exports.lab
 
 describe('Helper send-database-errors-message', () => {
-  it('should work', async () => {
+  it('should return a formatted error message', async () => {
     const errors = {
-      firstName: {
-        message: 'Path `firstName` is required.',
-      },
-      phone: {
-        message: 'Path `phone` is required.',
-      },
+      firstName: { kind: 'required' },
+      phone: { kind: 'unique' },
+      unknown: { kind: 'unknown', message: 'unknown error message' },
     }
 
     const hMock = {
@@ -34,8 +31,9 @@ describe('Helper send-database-errors-message', () => {
       code: 500,
       type: 'text/json',
       responseResult: {
-        firstName: 'Path `firstName` is required.',
-        phone: 'Path `phone` is required.',
+        firstName: 'This field is required.',
+        phone: 'The value set is already in use.',
+        unknown: 'unknown error message',
       },
     })
   })

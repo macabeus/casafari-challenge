@@ -5,7 +5,7 @@ import { Alert } from 'reactstrap'
 const AlertErrors = ({ errors }) => {
   const errorsList = Object
     .entries(errors)
-    .map(([key, value]) => <li key={key}>${key}: ${value}</li>)
+    .map(([key, value]) => <li key={key}>{key}: {value}</li>)
 
   if (errorsList.length === 0) {
     return null

@@ -1,20 +1,20 @@
 import { baseUrl } from './config'
 
-const fetchContacts = async () => {
+const findAll = async () => {
   const response = await fetch(`${baseUrl}/contacts`)
   const responseJson = await response.json()
 
   return responseJson
 }
 
-const fetchContact = async (id) => {
+const findOne = async (id) => {
   const response = await fetch(`${baseUrl}/contacts/${id}`)
   const responseJson = await response.json()
 
   return responseJson
 }
 
-const saveContact = async ({ firstName, lastName, phone }) => {
+const saveOne = async ({ firstName, lastName, phone }) => {
   const data = { firstName, lastName, phone }
   const response = await fetch(`${baseUrl}/contacts`, {
     body: JSON.stringify(data),
@@ -27,7 +27,7 @@ const saveContact = async ({ firstName, lastName, phone }) => {
   return response
 }
 
-const updateContact = async (id, { firstName, lastName, phone }) => {
+const updateOne = async (id, { firstName, lastName, phone }) => {
   const data = { firstName, lastName, phone }
   const response = await fetch(`${baseUrl}/contacts/${id}`, {
     body: JSON.stringify(data),
@@ -40,7 +40,7 @@ const updateContact = async (id, { firstName, lastName, phone }) => {
   return response
 }
 
-const deleteContact = async (id) => {
+const deleteOne = async (id) => {
   const response = await fetch(`${baseUrl}/contacts/${id}`, {
     method: 'DELETE',
   })
@@ -48,10 +48,10 @@ const deleteContact = async (id) => {
   return response
 }
 
-export {
-  fetchContacts,
-  fetchContact,
-  saveContact,
-  updateContact,
-  deleteContact,
+export default {
+  deleteOne,
+  findAll,
+  findOne,
+  saveOne,
+  updateOne,
 }

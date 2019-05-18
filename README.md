@@ -50,7 +50,9 @@ After Mongo is initialized (it takes a few seconds), you need to run the back-en
 docker-compose up contact_server
 ```
 
-Then, the API will be running at [`http://localhost:3000`](http://localhost:3000). Now, to run the front-end start the following service:
+Then, the API will be running at [`http://localhost:3000`](http://localhost:3000). You can check if everything is fine using the API [`GET http://localhost:3000/`](http://localhost:3000/status); if you see `"ok"`, then the server is running.
+
+Now, to run the front-end start the following service:
 
 ```
 docker-compose up contact_front

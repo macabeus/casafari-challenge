@@ -11,7 +11,7 @@ const contactSchema = new mongoose.Schema({
   },
 }, { timestamps: true })
 
-contactSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' })
+contactSchema.plugin(uniqueValidator, { type: 'unique' })
 const Contact = mongoose.model('Contact', contactSchema)
 
 module.exports = Contact

@@ -8,14 +8,14 @@ const Contact = require('../models/contact')
 
 const findAll = () => Contact.find()
 
-const find = id => Contact.findById(id)
+const findOne = id => Contact.findById(id)
 
-const save = ({ firstName, lastName, phone }) => {
+const saveOne = ({ firstName, lastName, phone }) => {
   const contact = new Contact({ firstName, lastName, phone })
   return contact.save()
 }
 
-const update = (id, dataToUpdate) => {
+const updateOne = (id, dataToUpdate) => {
   const dataFiltered = filter(
     pipe(isNil, not),
     dataToUpdate
@@ -28,8 +28,8 @@ const deleteOne = id => Contact.deleteOne({ _id: id })
 
 module.exports = {
   findAll,
-  find,
-  save,
-  update,
+  findOne,
+  saveOne,
+  updateOne,
   deleteOne,
 }

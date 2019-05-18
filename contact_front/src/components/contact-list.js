@@ -15,7 +15,7 @@ const ContactList = ({ contacts, onClickRowHandle }) => {
   ))
 
   return (
-    <Table>
+    <Table responsive>
       <thead>
         <tr>
           <th>First Name</th>

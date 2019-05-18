@@ -1,16 +1,17 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Card,
   CardBody,
   CardHeader,
   Col,
+  Container,
   Row,
 } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import AddContactButton from '../components/add-contact-button'
 import AddContactModal from '../components/add-contact-modal'
 import ContactList from '../components/contact-list'
-import { fetchContacts } from '../network/contacts'
+import contactsNetwork from '../network/contacts'
 
 const ContactCard = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -19,7 +20,7 @@ const ContactCard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedContacts = await fetchContacts()
+      const fetchedContacts = await contactsNetwork.findAll()
       setContacts(fetchedContacts)
     }
 
@@ -27,11 +28,11 @@ const ContactCard = () => {
   }, [modalIsOpen])
 
   if (toEditContact !== null) {
-    return <Redirect to={`/edit/${toEditContact}`} />
+    return <Redirect push to={`/edit/${toEditContact}`} />
   }
 
   return (
-    <Fragment>
+    <Container fluid>
       <AddContactModal
         isOpen={modalIsOpen}
         closeModalHandle={() => setModalIsOpen(false)}
@@ -41,7 +42,7 @@ const ContactCard = () => {
         <CardHeader>Contact List</CardHeader>
         <CardBody>
           <Row>
-            <Col sm={{ offset: 11, size: 'auto' }} style={{ padding: '.5rem' }}>
+            <Col style={{ padding: '.5rem' }}>
               <AddContactButton openModalHandle={() => setModalIsOpen(true)} />
             </Col>
           </Row>
@@ -57,7 +58,7 @@ const ContactCard = () => {
 
         </CardBody>
       </Card>
-    </Fragment>
+    </Container>
   )
 }
 
