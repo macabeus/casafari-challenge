@@ -2,7 +2,7 @@ const Lab = require('@hapi/lab')
 const { expect } = require('@hapi/code')
 const { init } = require('../../src/server')
 
-const findAllResult = [
+const findPaginatedResult = [
   {
     id: '5cdb88af9d3797049aec5457',
     firstName: 'pikachu',
@@ -24,7 +24,7 @@ const saveResult = {
 
 const mockAppDbMethods = {
   contacts: {
-    findAll: () => findAllResult,
+    findPaginated: () => findPaginatedResult,
     saveOne: () => saveResult,
   },
 }
@@ -56,7 +56,7 @@ describe('Route /contacts', () => {
     })
 
     expect(res.statusCode).to.equal(200)
-    expect(res.result).to.equal(findAllResult)
+    expect(res.result).to.equal(findPaginatedResult)
   })
 
   it('should result success when receives a POST request', async () => {
