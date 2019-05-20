@@ -16,9 +16,15 @@ const routeSpecGet = server => ({
   path: '/contacts',
   handler: async (request, h) => {
     const { db } = server.app
-    const findAllResult = await db.contacts.findAll()
+    let { page } = request.query
 
-    const resultMapped = findAllResult.map(buildContactsToReponse)
+    if (page === undefined) {
+      page = 1
+    }
+
+    const findPaginated = await db.contacts.findPaginated(page)
+
+    const resultMapped = findPaginated.map(buildContactsToReponse)
 
     const response = h.response(resultMapped)
     response.type('text/json')

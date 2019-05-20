@@ -1,7 +1,7 @@
 import { baseUrl } from './config'
 
-const findAll = async () => {
-  const response = await fetch(`${baseUrl}/contacts`)
+const findPaginated = async (page) => {
+  const response = await fetch(`${baseUrl}/contacts?page=${page}`)
   const responseJson = await response.json()
 
   return responseJson
@@ -58,8 +58,8 @@ const deleteOne = async (id) => {
 export default {
   countPages,
   deleteOne,
-  findAll,
   findOne,
+  findPaginated,
   saveOne,
   updateOne,
 }
