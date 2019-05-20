@@ -27,6 +27,21 @@ const routeSpecGet = server => ({
   },
 })
 
+const routeSpecCount = server => ({
+  method: 'GET',
+  path: '/contacts/pages-count',
+  handler: async (request, h) => {
+    const { db } = server.app
+
+    const resultCount = await db.contacts.countPages()
+
+    const response = h.response(resultCount)
+    response.type('text/json')
+
+    return response
+  },
+})
+
 const routeSpecGetId = server => ({
   method: 'GET',
   path: '/contacts/{id}',
@@ -122,6 +137,7 @@ const routeSpecDelete = server => ({
 
 module.exports = [
   routeSpecGet,
+  routeSpecCount,
   routeSpecGetId,
   routeSpecPost,
   routeSpecPatch,

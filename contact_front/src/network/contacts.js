@@ -7,6 +7,13 @@ const findAll = async () => {
   return responseJson
 }
 
+const countPages = async () => {
+  const response = await fetch(`${baseUrl}/contacts/pages-count`)
+  const totalPages = await response.json()
+
+  return totalPages
+}
+
 const findOne = async (id) => {
   const response = await fetch(`${baseUrl}/contacts/${id}`)
   const responseJson = await response.json()
@@ -49,6 +56,7 @@ const deleteOne = async (id) => {
 }
 
 export default {
+  countPages,
   deleteOne,
   findAll,
   findOne,
