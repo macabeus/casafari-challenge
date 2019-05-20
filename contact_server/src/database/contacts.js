@@ -6,7 +6,19 @@ const {
 } = require('ramda')
 const Contact = require('../models/contact')
 
-const findAll = () => Contact.find()
+const PAGE_LIMIT = 3
+
+const findPaginated = page => Contact
+  .find()
+  .limit(PAGE_LIMIT)
+  .skip(PAGE_LIMIT * (page - 1))
+
+const countPages = async () => {
+  const count = await Contact.count()
+  const pages = Math.ceil(count / PAGE_LIMIT)
+
+  return pages
+}
 
 const findOne = id => Contact.findById(id)
 
@@ -27,7 +39,8 @@ const updateOne = (id, dataToUpdate) => {
 const deleteOne = id => Contact.deleteOne({ _id: id })
 
 module.exports = {
-  findAll,
+  findPaginated,
+  countPages,
   findOne,
   saveOne,
   updateOne,

@@ -11,24 +11,38 @@ import { Redirect } from 'react-router-dom'
 import AddContactButton from '../components/add-contact-button'
 import AddContactModal from '../components/add-contact-modal'
 import ContactList from '../components/contact-list'
+import Pagination from '../components/pagination'
 import contactsNetwork from '../network/contacts'
 
 const ContactCard = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [contacts, setContacts] = useState([])
   const [toEditContact, setToEditContact] = useState(null)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedContacts = await contactsNetwork.findAll()
+      const fetchedContacts = await contactsNetwork.findPaginated(page)
+      const fetchedTotalPages = await contactsNetwork.countPages()
+
       setContacts(fetchedContacts)
+      setTotalPages(fetchedTotalPages)
     }
 
     fetchData()
-  }, [modalIsOpen])
+  }, [modalIsOpen, page])
 
   if (toEditContact !== null) {
     return <Redirect push to={`/edit/${toEditContact}`} />
+  }
+
+  const onClickPaginationHandle = (newPage, isActivePage) => {
+    if (isActivePage) {
+      return
+    }
+
+    setPage(newPage)
   }
 
   return (
@@ -56,6 +70,13 @@ const ContactCard = () => {
             </Col>
           </Row>
 
+          <Row>
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              onClickPaginationHandle={onClickPaginationHandle}
+            />
+          </Row>
         </CardBody>
       </Card>
     </Container>

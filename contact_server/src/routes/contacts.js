@@ -16,11 +16,32 @@ const routeSpecGet = server => ({
   path: '/contacts',
   handler: async (request, h) => {
     const { db } = server.app
-    const findAllResult = await db.contacts.findAll()
+    let { page } = request.query
 
-    const resultMapped = findAllResult.map(buildContactsToReponse)
+    if (page === undefined) {
+      page = 1
+    }
+
+    const findPaginated = await db.contacts.findPaginated(page)
+
+    const resultMapped = findPaginated.map(buildContactsToReponse)
 
     const response = h.response(resultMapped)
+    response.type('text/json')
+
+    return response
+  },
+})
+
+const routeSpecCount = server => ({
+  method: 'GET',
+  path: '/contacts/pages-count',
+  handler: async (request, h) => {
+    const { db } = server.app
+
+    const resultCount = await db.contacts.countPages()
+
+    const response = h.response(resultCount)
     response.type('text/json')
 
     return response
@@ -122,6 +143,7 @@ const routeSpecDelete = server => ({
 
 module.exports = [
   routeSpecGet,
+  routeSpecCount,
   routeSpecGetId,
   routeSpecPost,
   routeSpecPatch,
